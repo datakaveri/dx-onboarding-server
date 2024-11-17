@@ -1,4 +1,4 @@
-package iudx.onboarding.server.token;
+package iudx.onboarding.server.minio;
 
 import io.vertx.codegen.annotations.GenIgnore;
 import io.vertx.codegen.annotations.ProxyGen;
@@ -9,14 +9,12 @@ import io.vertx.core.json.JsonObject;
 
 @ProxyGen
 @VertxGen
-public interface TokenService {
+public interface MinioService {
 
   @GenIgnore
-  static TokenService createProxy(Vertx vertx, String address) {
-    return new TokenServiceVertxEBProxy(vertx, address);
+  static MinioService createProxy(Vertx vertx, String address) {
+    return new MinioServiceVertxEBProxy(vertx, address);
   }
 
-  Future<JsonObject> createToken();
-
-  Future<JsonObject> decodeToken(String token);
+  Future<String> createBucket(String username);
 }
